@@ -33,7 +33,7 @@ benchmark of R²=0.90 on weekly granularity data.
 2. Which supply-side and momentum features drive predictive power across 
    structurally distinct market regimes (stable vs. volatile)?
 
-3. Does model complexity — via stacking ensembles — improve upon 
+3. Does model complexity, via stacking ensembles, improve upon 
    well-tuned individual models, or does refinement outperform 
    architectural complexity?
 
