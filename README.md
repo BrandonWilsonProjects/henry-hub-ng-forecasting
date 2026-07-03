@@ -14,7 +14,7 @@ modeling, and interpretability analysis for a weekly Henry Hub natural
 gas spot price forecasting study. The project benchmarks classical machine 
 learning models against published hybrid architectures, demonstrating that 
 Bayesian-tuned gradient boosting with engineered supply-side and momentum 
-features achieves competitive or superior predictive accuracy — without 
+features achieves competitive or superior predictive accuracy, without 
 the computational overhead and opacity of CNN-LSTM hybrid designs.
 
 **Key result:** A volatile-window-tuned XGBoost model achieves R²=0.94 
