@@ -84,15 +84,19 @@ Beyond raw data, the following derived features are constructed:
 ## Modeling Pipeline
 
 Raw Data
+
 ↓
 
 Feature Engineering (momentum, rolling stats, z-scores)
+
 ↓
 
 Feature Selection (LASSO + RF consensus on autocorrelation-residualized target)
+
 ↓
 
 Log Transform + RobustScaler (fit on training window only)
+
 ↓
 
 ┌─────────────────────────────────────────────────────────┐
@@ -101,12 +105,15 @@ Log Transform + RobustScaler (fit on training window only)
 │  XGBoost (volatile-targeted Bayesian optimization)      │
 │  Enhanced Stack (RF + XGB + LGBM + CatBoost → RidgeCV) │
 └─────────────────────────────────────────────────────────┘
+
 ↓
 
 Regime-Stratified Evaluation
+
 ↓
 
 SHAP Interpretability Analysis
+
 ↓
 
 Diebold-Mariano Significance Testing
