@@ -85,12 +85,16 @@ Beyond raw data, the following derived features are constructed:
 
 Raw Data
 ↓
+
 Feature Engineering (momentum, rolling stats, z-scores)
 ↓
+
 Feature Selection (LASSO + RF consensus on autocorrelation-residualized target)
 ↓
+
 Log Transform + RobustScaler (fit on training window only)
 ↓
+
 ┌─────────────────────────────────────────────────────────┐
 │  Ridge Regression (baseline — no lagged price features) │
 │  Random Forest (500–691 trees, Bayesian-tuned)          │
@@ -98,10 +102,13 @@ Log Transform + RobustScaler (fit on training window only)
 │  Enhanced Stack (RF + XGB + LGBM + CatBoost → RidgeCV) │
 └─────────────────────────────────────────────────────────┘
 ↓
+
 Regime-Stratified Evaluation
 ↓
+
 SHAP Interpretability Analysis
 ↓
+
 Diebold-Mariano Significance Testing
 
 ---
