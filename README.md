@@ -100,7 +100,8 @@ Log Transform + RobustScaler (fit on training window only)
 ↓
 
 ┌─────────────────────────────────────────────────────────┐
-│  Ridge Regression (baseline — no lagged price features) │
+│ 
+Ridge Regression (baseline — no lagged price features) │
 │  Random Forest (500–691 trees, Bayesian-tuned)          │
 │  XGBoost (volatile-targeted Bayesian optimization)      │
 │  Enhanced Stack (RF + XGB + LGBM + CatBoost → RidgeCV) │
