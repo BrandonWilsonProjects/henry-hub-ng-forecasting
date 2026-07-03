@@ -149,7 +149,7 @@ requirements.
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/henry-hub-ng-forecasting.git
+git clone https://github.com/BrandonWilsonProjects/henry-hub-ng-forecasting.git
 cd henry-hub-ng-forecasting
 pip install -r requirements.txt
 ```
