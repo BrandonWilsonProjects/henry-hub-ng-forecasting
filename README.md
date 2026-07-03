@@ -83,43 +83,18 @@ Beyond raw data, the following derived features are constructed:
 
 ## Modeling Pipeline
 
-Raw Data
-
-↓
-
-Feature Engineering (momentum, rolling stats, z-scores)
-
-↓
-
-Feature Selection (LASSO + RF consensus on autocorrelation-residualized target)
-
-↓
-
-Log Transform + RobustScaler (fit on training window only)
-
-↓
-
-┌─────────────────────────────────────────────────────────┐
-│ 
-Ridge Regression (baseline — no lagged price features) │
-│  Random Forest (500–691 trees, Bayesian-tuned)          │
-│  XGBoost (volatile-targeted Bayesian optimization)      │
-│  Enhanced Stack (RF + XGB + LGBM + CatBoost → RidgeCV) │
-└─────────────────────────────────────────────────────────┘
-
-↓
-
-Regime-Stratified Evaluation
-
-↓
-
-SHAP Interpretability Analysis
-
-↓
-
-Diebold-Mariano Significance Testing
-
----
+| Step | Stage | Description | Justification |
+|:---:|---|---|---|
+| 1 | **Raw Data Ingestion** | Weekly Henry Hub spot price, EIA storage, NOAA weather, Baker Hughes rig count, and WTI crude oil collected from FRED, EIA, NOAA CPC, and Baker Hughes (2002–2024, n=1,102 observations) | Multi-source dataset captures supply-side, demand-side, and macroeconomic dimensions of natural gas price formation |
+| 2 | **Outlier & Missing Data Audit** | IQR and z-score outlier flagging across all features; zero missing values confirmed across all 13 raw variables | Ensures data integrity prior to feature engineering; documents extreme events (polar vortex z=7.58) for later regime analysis |
+| 3 | **Feature Engineering** | Momentum and velocity derivatives (4-week and 8-week rate of change, acceleration terms); rolling window statistics (4, 8, 26-week mean, std, min, max); 52-week storage z-score; 8-week price volatility | Replicates temporal dynamics that LSTM architectures learn implicitly, making sequential information accessible to tree-based models without recurrent architecture |
+| 4 | **Feature Selection** | LASSO and Random Forest importances computed on autocorrelation-residualized target; features selected by consensus of both methods | Partialling out lag₄ autocorrelation allows supply-side features to compete fairly; consensus selection reduces noise and multicollinearity |
+| 5 | **Preprocessing** | Log transformation of target variable; RobustScaler fit exclusively on training window and applied via transform to evaluation windows | Log transform stabilizes heteroscedastic variance across price regimes; RobustScaler mitigates influence of outliers on scaling parameters |
+| 6 | **Regime Definition** | Stable: 2015–2019 (shale-era suppression, mean CV < 0.15); Volatile: 2019–2024 (COVID disruption, February 2021 polar vortex, post-Ukraine price surge) | Empirically defined using 52-week rolling coefficient of variation; enables regime-stratified evaluation rather than single aggregate test window |
+| 7 | **Model Training** | Four specifications trained on 2003–2019 window: (i) Ridge Regression baseline; (ii) Random Forest; (iii) XGBoost with volatile-targeted Bayesian optimization (400 Optuna trials); (iv) Enhanced Stacking ensemble (RF + XGBoost + LightGBM + CatBoost → RidgeCV meta-learner via OOF predictions) | Bayesian optimization with window-targeted objective directly optimizes for regime-specific generalization; manual OOF stacking preserves temporal integrity across folds |
+| 8 | **Evaluation** | Regime-stratified window evaluation on held-out stable and volatile windows; five metrics reported: MAE, RMSE, NMSE, TIC, R² | Matches Du et al. (2025) metric reporting for direct comparison; regime stratification reveals performance variation masked by aggregate test splits |
+| 9 | **Statistical Significance** | Diebold-Mariano pairwise tests across all model combinations on both evaluation windows | Confirms observed performance differences are statistically distinguishable from chance — a gap in prior natural gas ML forecasting literature |
+| 10 | **Interpretability** | SHAP TreeExplainer on trimmed XGBoost; dual-window bar comparison (stable vs. volatile); waterfall plot for individual prediction explanation; ablation study isolating supply-side feature contribution | Provides per-prediction and aggregate feature attribution unavailable from hybrid neural architectures; supports industrial deployment where model transparency is operationally required |
 
 ## Results Summary
 
