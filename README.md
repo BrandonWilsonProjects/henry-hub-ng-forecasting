@@ -203,5 +203,6 @@ MIT License. See `LICENSE` for details.
 
 ## Contact
 
-Brandon Wilson — Graduate Researcher, University of Maryland  
+Brandon Wilson
+Graduate Researcher, University of Maryland, CMNS
 Department of Data Science and Machine Learning
