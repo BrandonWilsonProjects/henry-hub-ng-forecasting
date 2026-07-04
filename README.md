@@ -53,7 +53,7 @@ benchmark of R²=0.90 on weekly granularity data.
 | Rig Count | Baker Hughes | Weekly | 2002–2024 |
 
 > **Note:** Raw data is not included in this repository due to licensing 
-> constraints. See `data/README.md` for instructions on accessing and 
+> constraints. See `data/READMEDATA.md` for instructions on accessing and 
 > downloading each source.
 
 ---
