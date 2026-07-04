@@ -255,7 +255,7 @@ print(f"Columns: {df.columns.tolist()}")
 ```
 
 ---
-NOTE: THis pipeline is built into the .ipynb source file. 
+*NOTE: This pipeline is built into the .ipynb source file.* 
 
 ## Final Dataset Schema
 
