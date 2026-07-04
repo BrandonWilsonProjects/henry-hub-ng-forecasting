@@ -9,7 +9,7 @@ repository due to source licensing constraints. All datasets are
 publicly available at no cost from the sources listed below.
 
 Following these instructions exactly will reproduce the full dataset 
-used in the accompanying paper. The final merged dataset spans 
+used in the accompanying paper (still in works). The final merged dataset spans 
 **December 28, 2002 to December 28, 2024** at weekly frequency, 
 yielding **1,102 observations** after preprocessing.
 
