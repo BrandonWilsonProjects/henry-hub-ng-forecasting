@@ -201,61 +201,8 @@ storage dashboard as the working storage level.
 
 ## Data Merging and Alignment
 
-All six source datasets are merged on a common weekly Friday date 
-index. The following preprocessing steps are applied before modeling:
-
-```python
-import pandas as pd
-import numpy as np
-
-# Load all sources
-hh    = pd.read_csv('data/raw/fred/henry_hub_spot_price.csv',
-                     parse_dates=['date'], index_col='date')
-wti   = pd.read_csv('data/raw/fred/wti_crude_price.csv',
-                     parse_dates=['date'], index_col='date')
-stor  = pd.read_csv('data/raw/eia/ng_storage_weekly.csv',
-                     parse_dates=['date'], index_col='date')
-avg5  = pd.read_csv('data/raw/eia/ng_storage_5yr_avg.csv',
-                     parse_dates=['date'], index_col='date')
-hdd   = pd.read_csv('data/raw/noaa/hdd_cdd_weekly.csv',
-                     parse_dates=['date'], index_col='date')
-rigs  = pd.read_csv('data/raw/baker_hughes/rig_count_weekly.csv',
-                     parse_dates=['date'], index_col='date')
-
-# Resample WTI to weekly Friday frequency
-wti = wti.resample('W-FRI').last().ffill()
-
-# Merge on inner join — drops weeks where any source is missing
-df = (hh
-      .join(wti,   how='inner')
-      .join(stor,  how='inner')
-      .join(avg5,  how='inner')
-      .join(hdd,   how='inner')
-      .join(rigs,  how='inner'))
-
-# Derived features
-df['storage_chg']    = df['storage_bcf'].diff(1)
-df['storage_vs_5yr'] = df['storage_bcf'] - df['storage_5yr_avg']
-df['rig_lag4']       = df['rig_count'].shift(4)
-
-# Lagged price features
-df['lag_2']  = df['hh_price'].shift(2)
-df['lag_4']  = df['hh_price'].shift(4)
-df['lag_52'] = df['hh_price'].shift(52)
-
-# Drop NaN rows introduced by lagging
-df = df.dropna()
-
-# Save master dataset
-df.to_csv('data/processed/ng_master_dataset.csv')
-
-print(f"Master dataset: {len(df)} observations")
-print(f"Date range: {df.index.min()} to {df.index.max()}")
-print(f"Columns: {df.columns.tolist()}")
-```
-
----
-*NOTE: This pipeline is built into the .ipynb source file.* 
+All six source datasets are merged on a common weekly Saturday date 
+index. See index 90 - 97 within the .ipynb file for merging and alignment clarification
 
 ## Final Dataset Schema
 
