@@ -110,10 +110,16 @@ Beyond raw data, the following derived features are constructed:
 All results on weekly data unless otherwise noted.
 
 **Diebold-Mariano significance:** XGBoost significantly outperforms Ridge 
-(p<0.001) and Random Forest (p=0.019) on the stable window. Performance 
-differences on the volatile window do not reach significance between 
-ensemble models, consistent with correlated error structures during 
-extreme market events.
+(p<0.001), Random Forest (p=0.019) and Enhanced Stacking ensemble (p<0.001) on the
+stable window. On the volatile window, XGBoost maintains statistically significant
+advantages over both Random Forest (p=0.021) and the Enhacned Stack (p<0.001). This is 
+a stronger result than the stable-window-only significance observed in preliminary model 
+specifications. Notably, the Enhanced Stacking ensemble is significantly outperformed by 
+Random Forest on both windows (stable: p<0.001; volatile: p=0.008), providing statistical 
+evidence that ensemble complexity actively reduces predictive accuracy relative to well-tuned 
+individual models in this forecasting context. XGBoost versus Ridge does not reach 
+significance on the volatile window (p=0.278), consistent with correlated error structures
+across models during extreme market events where all models systematically underpredict sharp price spikes.  
 
 ---
 
