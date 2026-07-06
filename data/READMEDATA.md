@@ -202,7 +202,7 @@ storage dashboard as the working storage level.
 ## Data Merging and Alignment
 
 All six source datasets are merged on a common weekly Saturday date 
-index. See index 90 - 97 within the .ipynb file for merging and alignment clarification
+index. See index 90 - 97 within the .ipynb file for merging and alignment clarification. 
 
 ## Final Dataset Schema
 
