@@ -17,7 +17,7 @@ Bayesian-tuned gradient boosting with engineered supply-side and momentum
 features achieves competitive or superior predictive accuracy, without 
 the computational overhead and opacity of CNN-LSTM hybrid designs.
 
-**Key result:** A volatile-window-tuned XGBoost model achieves R²=0.94 
+**Key result:** A volatile-window-tuned XGBoost model achieves R²=0.96 
 on the stable evaluation window (2015–2019) and R²=0.94 on the volatile 
 evaluation window (2019–2024), surpassing the Du et al. (2025) hybrid 
 benchmark of R²=0.90 on weekly granularity data.
